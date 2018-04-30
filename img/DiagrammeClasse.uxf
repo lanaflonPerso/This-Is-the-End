@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>16</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1840</x>
+      <y>320</y>
+      <w>384</w>
+      <h>480</h>
+    </coordinates>
+    <panel_attributes>modele::Agent
+
+--
+-id: Long
+-idRh String 
+-nom: String
+-prénom: String
+-dateNaissance: Date
+-brigate: Long
+
+--
+
+
+bg=light_gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1216</x>
+      <y>464</y>
+      <w>448</w>
+      <h>528</h>
+    </coordinates>
+    <panel_attributes>modele::Session
+
+--
+-id: Long
+-date: Date
+-agents: Agent[]
+-formateur: Formateur
+-formation: Formation
+-habilitation: Habilitation
+-salle: Salle
+--
+
+
+
+
+bg=light_gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>112</y>
+      <w>400</w>
+      <h>480</h>
+    </coordinates>
+    <panel_attributes>modele::Salle
+
+--
+-id: Long
+-nom: String
+-etage: int
+
+
+
+
+--
+
+bg=light_gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>640</y>
+      <w>400</w>
+      <h>480</h>
+    </coordinates>
+    <panel_attributes>modele::Formation
+
+--
+-id: Long
+-code: String
+-nom: String
+-contenu: String
+-durée: int
+-habilitation: booleen
+-date de validité
+
+--
+
+bg=light_gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2656</x>
+      <y>592</y>
+      <w>400</w>
+      <h>480</h>
+    </coordinates>
+    <panel_attributes>modele:Flux
+
+--
+-id: Long
+-nom: String
+
+
+
+--
+
+bg=light_gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>672</x>
+      <y>752</y>
+      <w>576</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=1
+m1=*
+
+
+&lt; a pour thème</panel_attributes>
+    <additional_attributes>340.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>672</x>
+      <y>320</y>
+      <w>576</w>
+      <h>320</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=1
+m1=*
+
+
+&lt; est dans</panel_attributes>
+    <additional_attributes>340.0;170.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1648</x>
+      <y>480</y>
+      <w>224</w>
+      <h>224</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=*
+m1=*</panel_attributes>
+    <additional_attributes>10.0;120.0;120.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2656</x>
+      <y>64</y>
+      <w>400</w>
+      <h>480</h>
+    </coordinates>
+    <panel_attributes>modele: Grade
+
+--
+-id: Long
+-classe: String
+-grade: String
+
+
+
+--
+
+bg=light_gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2208</x>
+      <y>288</y>
+      <w>480</w>
+      <h>272</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=1
+m1=*
+
+
+
+fait parti de &gt;</panel_attributes>
+    <additional_attributes>10.0;140.0;280.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2208</x>
+      <y>608</y>
+      <w>480</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=1
+m1=*
+
+
+
+fait parti de &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;280.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2656</x>
+      <y>1152</y>
+      <w>400</w>
+      <h>480</h>
+    </coordinates>
+    <panel_attributes>modele:Ilot
+
+--
+-id: Long
+-nom: String
+
+
+
+
+--
+
+bg=light_gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2208</x>
+      <y>720</y>
+      <w>480</w>
+      <h>640</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=1
+m1=*
+
+
+
+
+
+
+
+
+fait parti de &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;280.0;380.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>288</x>
+      <y>1168</y>
+      <w>400</w>
+      <h>480</h>
+    </coordinates>
+    <panel_attributes>modele:Formateur
+
+--
+-id: Long
+-idRh String 
+-nom: String
+-prénom: String
+
+
+--
+
+
+bg=light_gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>672</x>
+      <y>880</y>
+      <w>576</w>
+      <h>480</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=1
+m1=*
+
+
+
+
+&lt; animée par
+</panel_attributes>
+    <additional_attributes>340.0;10.0;10.0;270.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1440</x>
+      <y>1216</y>
+      <w>448</w>
+      <h>480</h>
+    </coordinates>
+    <panel_attributes>modele: GénèreDocument
+
+--
+-Entete: String
+-Corps: String
+
+
+
+
+
+--
++genereConvocation()
++genereFeuilleEmargement()
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1616</x>
+      <y>976</y>
+      <w>48</w>
+      <h>272</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m2=*
+m1=1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1216</x>
+      <y>112</y>
+      <w>384</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>Classe persistante
+bg=light_gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1216</x>
+      <y>176</y>
+      <w>384</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>Outils
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1216</x>
+      <y>48</y>
+      <w>384</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>Légende :
+
+fg=black
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
