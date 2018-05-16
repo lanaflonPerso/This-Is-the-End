@@ -22,6 +22,7 @@ export declare class Chips implements AfterContentInit, ControlValueAccessor {
     addOnBlur: boolean;
     onFocus: EventEmitter<any>;
     onBlur: EventEmitter<any>;
+    inputViewChild: ElementRef;
     templates: QueryList<any>;
     itemTemplate: TemplateRef<any>;
     value: any;
@@ -31,17 +32,18 @@ export declare class Chips implements AfterContentInit, ControlValueAccessor {
     focus: boolean;
     constructor(el: ElementRef, domHandler: DomHandler);
     ngAfterContentInit(): void;
+    onClick(event: any): void;
     writeValue(value: any): void;
     registerOnChange(fn: Function): void;
     registerOnTouched(fn: Function): void;
     setDisabledState(val: boolean): void;
     resolveFieldData(data: any, field: string): any;
     onInputFocus(event: FocusEvent): void;
-    onInputBlur(event: FocusEvent, inputEL: HTMLInputElement): void;
+    onInputBlur(event: FocusEvent): void;
     removeItem(event: Event, index: number): void;
     addItem(event: Event, item: string): void;
-    onKeydown(event: KeyboardEvent, inputEL: HTMLInputElement): void;
-    readonly maxedOut: boolean;
+    onKeydown(event: KeyboardEvent): void;
+    updateMaxedOut(): void;
 }
 export declare class ChipsModule {
 }

@@ -1,0 +1,12 @@
+:host >>> .ui-widget-header, .ui-sortable-column {
+
+    background-color:rgb(254, 203, 0) !important;
+}
+
+:host >>> .ui-growl-item {
+    background-color: aqua;
+} 
+
+ .ui-widget-header, .ui-sortable-column {
+    background-color:rgb(254, 203, 0) !important;
+}

@@ -36,6 +36,7 @@ export declare class MultiSelect implements OnInit, AfterViewInit, AfterContentI
     containerViewChild: ElementRef;
     panelViewChild: ElementRef;
     filterInputChild: ElementRef;
+    footerFacet: any;
     templates: QueryList<any>;
     onChange: EventEmitter<any>;
     onFocus: EventEmitter<any>;
@@ -57,7 +58,7 @@ export declare class MultiSelect implements OnInit, AfterViewInit, AfterContentI
     visibleOptions: SelectItem[];
     filtered: boolean;
     itemTemplate: TemplateRef<any>;
-    focusedItemCheckbox: HTMLInputElement;
+    focusedItemCheckbox: HTMLInputElement | null;
     _options: any[];
     constructor(el: ElementRef, domHandler: DomHandler, renderer: Renderer2, objectUtils: ObjectUtils, cd: ChangeDetectorRef);
     options: any[];

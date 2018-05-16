@@ -20,6 +20,7 @@ export declare class ScrollPanel implements AfterViewInit, OnDestroy {
     isXBarClicked: boolean;
     isYBarClicked: boolean;
     ngAfterViewInit(): void;
+    calculateContainerHeight(): void;
     moveBar(): void;
     onYBarMouseDown(e: MouseEvent): void;
     onXBarMouseDown(e: MouseEvent): void;

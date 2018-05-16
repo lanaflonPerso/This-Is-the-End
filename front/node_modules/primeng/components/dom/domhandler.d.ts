@@ -36,6 +36,7 @@ export declare class DomHandler {
         top: any;
         left: any;
     };
+    replaceElementWith(element: any, replacementElement: any): any;
     getUserAgent(): string;
     isIE(): boolean;
     appendChild(element: any, target: any): void;

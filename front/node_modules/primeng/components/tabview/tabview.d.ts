@@ -40,10 +40,12 @@ export declare class TabView implements AfterContentInit, BlockableUI {
     tabPanels: QueryList<TabPanel>;
     onChange: EventEmitter<any>;
     onClose: EventEmitter<any>;
+    activeIndexChange: EventEmitter<number>;
     initialized: boolean;
     tabs: TabPanel[];
     _activeIndex: number;
     _lazy: boolean;
+    preventActiveIndexPropagation: boolean;
     constructor(el: ElementRef);
     lazy: boolean;
     ngAfterContentInit(): void;

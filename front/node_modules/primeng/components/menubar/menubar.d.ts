@@ -1,9 +1,10 @@
-import { ElementRef, Renderer2, OnDestroy } from '@angular/core';
+import { ElementRef, Renderer2, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { DomHandler } from '../dom/domhandler';
 import { MenuItem } from '../common/menuitem';
 export declare class MenubarSub implements OnDestroy {
     domHandler: DomHandler;
     renderer: Renderer2;
+    private cd;
     item: MenuItem;
     root: boolean;
     autoDisplay: boolean;
@@ -15,7 +16,7 @@ export declare class MenubarSub implements OnDestroy {
     activeItem: any;
     hideTimeout: any;
     activeMenu: any;
-    constructor(domHandler: DomHandler, renderer: Renderer2);
+    constructor(domHandler: DomHandler, renderer: Renderer2, cd: ChangeDetectorRef);
     onItemMenuClick(event: Event, item: HTMLLIElement, menuitem: MenuItem): void;
     bindEventListener(): void;
     onItemMouseEnter(event: Event, item: HTMLLIElement, menuitem: MenuItem): void;

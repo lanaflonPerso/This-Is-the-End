@@ -27,10 +27,10 @@ export class MenuComponent implements OnInit {
             items: [
                 { label: 'Agents', icon: 'fa-table', routerLink: ['agents'] },
                 { label: 'Flux', icon: 'fa-table', routerLink: ['flux'] },
-                { label: 'Grades', icon: 'fa-table' },
+                { label: 'Ilots', icon: 'fa-table', routerLink: ['ilots'] },
+                { label: 'Grades', icon: 'fa-table', routerLink: ['grades'] },
                 { label: 'Formateurs', icon: 'fa-table' },
                 { label: 'Formations', icon: 'fa-table' },
-                { label: 'Habilitations', icon: 'fa-table' },
                 { label: 'Salles', icon: 'fa-table' }
             ]
         },

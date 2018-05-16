@@ -1,5 +1,5 @@
 export interface Grades {
     id?: number;
-    nom?: string;
-
+    grade?: string;
+    classe?: string;
 }

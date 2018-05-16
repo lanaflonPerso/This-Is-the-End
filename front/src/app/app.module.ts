@@ -1,3 +1,5 @@
+import { GradeService } from './grade.service';
+import { IlotService } from './ilot.service';
 import { FluxService } from './flux.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AgentService } from './agent.service';
@@ -23,9 +25,14 @@ import { MessageService } from 'primeng/components/common/messageservice';
 import { GrowlModule, MessageModule } from 'primeng/primeng';
 import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './/app-routing.module';
-import {DropdownModule} from 'primeng/dropdown';
+import { DropdownModule } from 'primeng/dropdown';
 import { TableauFluxComponent } from './tableau-flux/flux.component';
-import {CodeHighlighterModule} from 'primeng/codehighlighter';
+import { CodeHighlighterModule } from 'primeng/codehighlighter';
+import { TableauIlotComponent } from './tableau-ilot/tableau-ilot.component';
+import { TableauGradeComponent } from './tableau-grade/tableau-grade.component';
+import { TableauFormationComponent } from './tableau-formation/tableau-formation.component';
+import { TableauSalleComponent } from './tableau-salle/tableau-salle.component';
+import { TableauFormateurComponent } from './tableau-formateur/tableau-formateur.component';
 
 
 
@@ -35,7 +42,12 @@ import {CodeHighlighterModule} from 'primeng/codehighlighter';
     AppComponent,
     MenuComponent,
     TableauAgentComponent,
-    TableauFluxComponent
+    TableauFluxComponent,
+    TableauIlotComponent,
+    TableauGradeComponent,
+    TableauFormationComponent,
+    TableauSalleComponent,
+    TableauFormateurComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +76,8 @@ import {CodeHighlighterModule} from 'primeng/codehighlighter';
 
   ],
   exports: [BrowserModule],
-  providers: [AgentService, FluxService, ConfirmationService, FormControlDirective, FormGroupDirective, MessageService],
+  providers: [AgentService, FluxService, IlotService, GradeService, ConfirmationService,
+    FormControlDirective, FormGroupDirective, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

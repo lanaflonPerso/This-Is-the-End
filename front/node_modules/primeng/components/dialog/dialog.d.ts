@@ -33,6 +33,7 @@ export declare class Dialog implements AfterViewInit, AfterViewChecked, OnDestro
     minX: number;
     minY: number;
     autoAlign: boolean;
+    focusOnShow: boolean;
     headerFacet: QueryList<Header>;
     footerFacet: QueryList<Header>;
     containerViewChild: ElementRef;

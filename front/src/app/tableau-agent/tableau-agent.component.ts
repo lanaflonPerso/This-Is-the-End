@@ -1,3 +1,7 @@
+import { Grades } from './../modeles/grade';
+import { Ilots } from './../modeles/ilots';
+import { GradeService } from './../grade.service';
+import { IlotService } from './../ilot.service';
 import { style } from '@angular/animations';
 import { FluxService } from './../flux.service';
 import { Flux } from './../modeles/flux';
@@ -29,35 +33,35 @@ export class TableauAgentComponent implements OnInit {
   submitted: boolean;
   agentForm: FormGroup;
   msgs: Message[] = [];
-  flux: SelectItem[];
   listeFlux: Flux[];
-  groupFlux: SelectItemGroup[];
+  listeIlots: Ilots[];
+  listeGrades: Grades[];
 
 
-  constructor(private agentService: AgentService, private fluxService: FluxService, private fb: FormBuilder) { }
+  constructor(private agentService: AgentService, private fluxService: FluxService, private ilotService: IlotService,
+    private gradeService: GradeService, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.getFlux();
     this.getAgents();
+    this.getIlots();
+    this.getGrades();
 
     this.agentForm = this.fb.group({
-      'form': new FormControl('', Validators.required),
+      'prenom': new FormControl('', Validators.required),
+      'nom': new FormControl('', Validators.required),
+      'idrh': new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-zA-Z]{3}[0-9]{3}$')])),
 
-
-    });
-
-
-
+  });
   }
 
-    formulaireOk(): string {
-      let a: string;
-      a = 'false';
+    cacherBouton(): boolean {
+      let a: boolean;
+      a = true;
       if (this.agentForm.valid) {
-        a = 'true';
+        a = false;
       }
       return a;
-
     }
 
 
@@ -67,9 +71,21 @@ export class TableauAgentComponent implements OnInit {
       });
     }
 
+    getIlots() {
+      this.ilotService.getIlots().subscribe(ilots => {
+        this.listeIlots = ilots;
+      });
+    }
+
     getFlux() {
       this.fluxService.getAllFlux().subscribe(flux => {
         this.listeFlux = flux;
+      });
+    }
+
+    getGrades() {
+      this.gradeService.getGrades().subscribe(grades => {
+        this.listeGrades = grades;
       });
     }
 
@@ -85,7 +101,6 @@ export class TableauAgentComponent implements OnInit {
         agents.push(this.agent),
           this.agentService.createAgent(this.agent).subscribe(
             agent => this.agent = agent,
-
           );
         this.getAgents();
       } else {
@@ -121,8 +136,6 @@ export class TableauAgentComponent implements OnInit {
       }
       return agent;
     }
-
-
 
     // Filtre
     customSort(event: SortEvent) {

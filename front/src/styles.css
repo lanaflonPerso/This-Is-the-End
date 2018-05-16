@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+:host >>> .ui-widget-header, .ui-sortable-column {
+
+    background-color:rgb(254, 203, 0) !important;
+}
+
+#bandeau {
+    background-color: blue;
+    color: aliceblue;
+}

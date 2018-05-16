@@ -7,6 +7,7 @@ export declare class TieredMenuSub {
     root: boolean;
     autoZIndex: boolean;
     baseZIndex: number;
+    hideDelay: number;
     constructor(domHandler: DomHandler);
     activeItem: HTMLLIElement;
     hideTimeout: any;
@@ -26,6 +27,7 @@ export declare class TieredMenu implements AfterViewInit, OnDestroy {
     appendTo: any;
     autoZIndex: boolean;
     baseZIndex: number;
+    hideDelay: number;
     container: any;
     documentClickListener: any;
     preventDocumentDefault: any;

@@ -11,6 +11,7 @@ export declare class PickList implements AfterViewChecked, AfterContentInit {
     targetHeader: string;
     responsive: boolean;
     filterBy: string;
+    trackBy: Function;
     showSourceFilter: boolean;
     showTargetFilter: boolean;
     metaKeySelection: boolean;

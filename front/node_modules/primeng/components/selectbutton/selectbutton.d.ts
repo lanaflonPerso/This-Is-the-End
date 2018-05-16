@@ -15,6 +15,7 @@ export declare class SelectButton implements ControlValueAccessor {
     optionLabel: string;
     onOptionClick: EventEmitter<any>;
     onChange: EventEmitter<any>;
+    itemTemplate: any;
     value: any;
     focusedItem: HTMLInputElement;
     _options: any[];

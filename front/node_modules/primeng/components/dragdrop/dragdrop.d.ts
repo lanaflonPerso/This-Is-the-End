@@ -12,8 +12,8 @@ export declare class Draggable implements AfterViewInit, OnDestroy {
     onDrag: EventEmitter<any>;
     handle: any;
     dragListener: any;
-    mouseOverListener: any;
-    mouseLeaveListener: any;
+    mouseDownListener: any;
+    mouseUpListener: any;
     constructor(el: ElementRef, domHandler: DomHandler, zone: NgZone);
     ngAfterViewInit(): void;
     bindDragListener(): void;
@@ -23,8 +23,8 @@ export declare class Draggable implements AfterViewInit, OnDestroy {
     drag(event: any): void;
     dragStart(event: any): void;
     dragEnd(event: any): void;
-    mouseover(event: any): void;
-    mouseleave(event: any): void;
+    mousedown(event: any): void;
+    mouseup(event: any): void;
     allowDrag(): boolean;
     ngOnDestroy(): void;
 }

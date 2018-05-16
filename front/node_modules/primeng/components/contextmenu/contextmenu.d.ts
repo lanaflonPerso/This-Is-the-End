@@ -1,4 +1,4 @@
-import { ElementRef, AfterViewInit, OnDestroy, Renderer2 } from '@angular/core';
+import { ElementRef, AfterViewInit, OnDestroy, Renderer2, NgZone } from '@angular/core';
 import { DomHandler } from '../dom/domhandler';
 import { MenuItem } from '../common/menuitem';
 export declare class ContextMenuSub {
@@ -21,6 +21,7 @@ export declare class ContextMenu implements AfterViewInit, OnDestroy {
     el: ElementRef;
     domHandler: DomHandler;
     renderer: Renderer2;
+    zone: NgZone;
     model: MenuItem[];
     global: boolean;
     target: any;
@@ -31,16 +32,18 @@ export declare class ContextMenu implements AfterViewInit, OnDestroy {
     baseZIndex: number;
     containerViewChild: ElementRef;
     documentClickListener: any;
+    windowResizeListener: any;
     rightClickListener: any;
-    constructor(el: ElementRef, domHandler: DomHandler, renderer: Renderer2);
+    constructor(el: ElementRef, domHandler: DomHandler, renderer: Renderer2, zone: NgZone);
     ngAfterViewInit(): void;
     show(event?: MouseEvent): void;
     hide(): void;
     moveOnTop(): void;
     toggle(event?: MouseEvent): void;
     position(event?: MouseEvent): void;
-    bindDocumentClickListener(): void;
-    unbindDocumentClickListener(): void;
+    bindGlobalListeners(): void;
+    unbindGlobalListeners(): void;
+    onWindowResize(event: any): void;
     ngOnDestroy(): void;
 }
 export declare class ContextMenuModule {

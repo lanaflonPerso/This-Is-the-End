@@ -56,6 +56,8 @@ export declare class Schedule implements DoCheck, OnDestroy, OnInit, OnChanges, 
     onEventResize: EventEmitter<any>;
     onViewRender: EventEmitter<any>;
     onViewDestroy: EventEmitter<any>;
+    onNavLinkDayClick: EventEmitter<any>;
+    onNavLinkWeekClick: EventEmitter<any>;
     initialized: boolean;
     stopNgOnChangesPropagation: boolean;
     differ: any;

@@ -12,6 +12,7 @@ export declare class Sidebar implements AfterViewInit, AfterViewChecked, OnDestr
     styleClass: string;
     autoZIndex: boolean;
     baseZIndex: number;
+    modal: boolean;
     containerViewChild: ElementRef;
     onShow: EventEmitter<any>;
     onHide: EventEmitter<any>;

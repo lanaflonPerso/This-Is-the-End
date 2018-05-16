@@ -20,6 +20,8 @@ export declare class DataView implements OnInit, AfterContentInit, BlockableUI {
     styleClass: string;
     trackBy: Function;
     filterBy: string;
+    loading: boolean;
+    loadingIcon: string;
     onPage: EventEmitter<any>;
     onSort: EventEmitter<any>;
     header: any;
