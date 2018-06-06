@@ -43,7 +43,7 @@ public class Grade implements Serializable{
     @LastModifiedDate
     private Date updatedAt;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="grade_id", referencedColumnName="id", nullable = true)
     @JsonIgnoreProperties( value = {"grade"})
     private List<Agent> agent;

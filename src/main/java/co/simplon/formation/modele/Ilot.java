@@ -39,7 +39,7 @@ public class Ilot implements Serializable{
     @LastModifiedDate
     private Date updatedAt;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="ilot_id", referencedColumnName="id", nullable = true)
     @JsonIgnoreProperties( value = {"ilot"})
     private List<Agent> agent;

@@ -2,15 +2,12 @@ package co.simplon.formation.controleur;
 
 
 import co.simplon.formation.modele.Grade;
-import co.simplon.formation.outils.LettreConvocation;
-import co.simplon.formation.repository.GradeRepository;
-import com.itextpdf.text.DocumentException;
+import co.simplon.formation.service.GradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,21 +18,21 @@ public class GradeControleur {
 
     @Autowired
     private
-    GradeRepository modelRepository;
+    GradeService service;
 
     @GetMapping("/grades")
     public List<Grade> getAll() {
-        return modelRepository.findAll();
+        return service.findAll();
     }
 
     @PostMapping("/grade")
     public Grade create(@Valid @RequestBody Grade item) {
-        return modelRepository.save(item);
+        return service.save(item);
     }
 
     @GetMapping("/grade/{id}")
     public ResponseEntity<Grade> getById(@PathVariable(value = "id") Long id)  {
-        Optional<Grade> item = modelRepository.findById(id);
+        Optional<Grade> item = service.findById(id);
         if (item.isPresent()) {
             Grade form = item.get();
             return ResponseEntity.ok().body(form);
@@ -47,24 +44,26 @@ public class GradeControleur {
     public Grade update(@PathVariable(value = "id") Long id,
                        @Valid @RequestBody Grade details) {
 
-        Optional<Grade> oldVersion = modelRepository.findById(id);
+        Optional<Grade> oldVersion = service.findById(id);
         if (oldVersion.isPresent()) {
             Grade newVersion = oldVersion.get();
             if (details.getClasse() != null) {
                 newVersion.setClasse(details.getClasse());
-
             }
-            return modelRepository.save(newVersion);
+            if (details.getGrade() != null) {
+                newVersion.setGrade(details.getGrade());
+            }
+            return service.save(newVersion);
         }
         return details;
     }
 
     @DeleteMapping("/grade/{id}")
     public ResponseEntity<Grade> delete(@PathVariable(value = "id") Long id) {
-        Optional<Grade> item = modelRepository.findById(id);
+        Optional<Grade> item = service.findById(id);
         if (item.isPresent()) {
             Grade form = item.get();
-            modelRepository.delete(form);
+            service.delete(form);
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();

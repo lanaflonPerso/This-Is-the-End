@@ -1,7 +1,7 @@
 package co.simplon.formation.controleur;
 
 import co.simplon.formation.modele.Flux;
-import co.simplon.formation.repository.FluxRepository;
+import co.simplon.formation.service.FluxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,21 +17,21 @@ public class FluxControleur {
 
     @Autowired
     private
-    FluxRepository modelRepository;
+    FluxService service;
 
     @GetMapping("/flux")
     public List<Flux> getAll() {
-        return modelRepository.findAll();
+        return service.findAll();
     }
 
     @PostMapping("/flux")
     public Flux create(@Valid @RequestBody Flux item) {
-        return modelRepository.save(item);
+        return service.save(item);
     }
 
     @GetMapping("/flux/{id}")
     public ResponseEntity<Flux> getById(@PathVariable(value = "id") Long id) {
-        Optional<Flux> item = modelRepository.findById(id);
+        Optional<Flux> item = service.findById(id);
         if (item.isPresent()) {
             Flux form = item.get();
             return ResponseEntity.ok().body(form);
@@ -43,23 +43,23 @@ public class FluxControleur {
     public Flux update(@PathVariable(value = "id") Long id,
                        @Valid @RequestBody Flux details) {
 
-        Optional<Flux> oldVersion = modelRepository.findById(id);
+        Optional<Flux> oldVersion = service.findById(id);
         if (oldVersion.isPresent()) {
             Flux newVersion = oldVersion.get();
             if (details.getNom() != null) {
                 newVersion.setNom(details.getNom());
             }
-            return modelRepository.save(newVersion);
+            return service.save(newVersion);
         }
         return details;
     }
 
     @DeleteMapping("/flux/{id}")
     public ResponseEntity<Flux> delete(@PathVariable(value = "id") Long id) {
-        Optional<Flux> item = modelRepository.findById(id);
+        Optional<Flux> item = service.findById(id);
         if (item.isPresent()) {
             Flux form = item.get();
-            modelRepository.delete(form);
+            service.delete(form);
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();

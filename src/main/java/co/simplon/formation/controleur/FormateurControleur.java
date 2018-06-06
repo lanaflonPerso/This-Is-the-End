@@ -2,7 +2,7 @@ package co.simplon.formation.controleur;
 
 
 import co.simplon.formation.modele.Formateur;
-import co.simplon.formation.repository.FormateurRepository;
+import co.simplon.formation.service.FormateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,21 +18,21 @@ public class FormateurControleur {
 
     @Autowired
     private
-    FormateurRepository modelRepository;
+    FormateurService service;
 
     @GetMapping("/formateurs")
     public List<Formateur> getAll() {
-        return modelRepository.findAll();
+        return service.findAll();
     }
 
     @PostMapping("/formateur")
     public Formateur create(@Valid @RequestBody Formateur item) {
-        return modelRepository.save(item);
+        return service.save(item);
     }
 
     @GetMapping("/formateur/{id}")
     public ResponseEntity<Formateur> getById(@PathVariable(value = "id") Long id) {
-        Optional<Formateur> item = modelRepository.findById(id);
+        Optional<Formateur> item = service.findById(id);
         if (item.isPresent()) {
             Formateur form = item.get();
             return ResponseEntity.ok().body(form);
@@ -44,7 +44,7 @@ public class FormateurControleur {
     public Formateur update(@PathVariable(value = "id") Long id,
                        @Valid @RequestBody Formateur details) {
 
-        Optional<Formateur> oldVersion = modelRepository.findById(id);
+        Optional<Formateur> oldVersion = service.findById(id);
         if (oldVersion.isPresent()) {
             Formateur newVersion = oldVersion.get();
             if (details.getNom() != null) {
@@ -56,17 +56,23 @@ public class FormateurControleur {
             if (details.getIdRh() != null) {
                 newVersion.setIdRh(details.getIdRh());
             }
-            return modelRepository.save(newVersion);
+            if (details.getMail() != null) {
+                newVersion.setMail(details.getMail());
+            }
+            if (details.getTel() != null) {
+                newVersion.setTel(details.getTel());
+            }
+            return service.save(newVersion);
         }
         return details;
     }
 
     @DeleteMapping("/formateur/{id}")
     public ResponseEntity<Formateur> delete(@PathVariable(value = "id") Long id) {
-        Optional<Formateur> item = modelRepository.findById(id);
+        Optional<Formateur> item = service.findById(id);
         if (item.isPresent()) {
             Formateur form = item.get();
-            modelRepository.delete(form);
+            service.delete(form);
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();

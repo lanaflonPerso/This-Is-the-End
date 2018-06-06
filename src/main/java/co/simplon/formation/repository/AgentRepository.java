@@ -10,11 +10,6 @@ import java.util.List;
 @Repository
 public interface AgentRepository extends JpaRepository<Agent, Long> {
 
-    List<Agent> findByNom(String nom);
-
-    @Query("select u from Agent u")
-    List<Agent> tout();
-
 
 }
 

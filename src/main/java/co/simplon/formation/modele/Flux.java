@@ -38,7 +38,7 @@ public class Flux implements Serializable{
     @LastModifiedDate
     private Date updatedAt;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="flux_id", referencedColumnName="id", nullable = true)
     @JsonIgnoreProperties( value = {"flux"})
     private List<Agent> agent;

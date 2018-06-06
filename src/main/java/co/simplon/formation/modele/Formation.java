@@ -43,7 +43,7 @@ public class Formation implements Serializable {
     @LastModifiedDate
     private Date updatedAt;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="formation_id", referencedColumnName="id", nullable = true)
     @JsonIgnoreProperties(value = {"formation", "formateur", "habilitation", "salle"})
     private List<Seance> seance;

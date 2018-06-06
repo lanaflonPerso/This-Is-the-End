@@ -2,7 +2,7 @@ package co.simplon.formation.controleur;
 
 
 import co.simplon.formation.modele.Agent;
-import co.simplon.formation.repository.AgentRepository;
+import co.simplon.formation.service.AgentService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +19,11 @@ public class AgentControleur {
 
     @Autowired
     private
-    AgentRepository modelRepository;
+    AgentService service;
 
     @GetMapping("/agents")
     public List<Agent> getAll() {
-        return modelRepository.tout();
+        return service.findAll();
     }
 
     @PostMapping("/agent")
@@ -31,12 +31,12 @@ public class AgentControleur {
         item.setNom(item.getNom().toUpperCase());
         item.setPrenom(StringUtils.capitalize(item.getPrenom().toLowerCase()));
         item.setIdRh(item.getIdRh().toUpperCase());
-        return modelRepository.save(item);
+        return service.save(item);
     }
 
     @GetMapping("/agent/{id}")
     public ResponseEntity<Agent> getById(@PathVariable(value = "id") Long id) {
-        Optional<Agent> item = modelRepository.findById(id);
+        Optional<Agent> item = service.findById(id);
         if (item.isPresent()) {
             Agent form = item.get();
 
@@ -49,7 +49,7 @@ public class AgentControleur {
     public Agent update(@PathVariable(value = "id") Long id,
                        @Valid @RequestBody Agent details) {
 
-        Optional<Agent> oldVersion = modelRepository.findById(id);
+        Optional<Agent> oldVersion = service.findById(id);
         if (oldVersion.isPresent()) {
             Agent newVersion = oldVersion.get();
             if (details.getNom() != null) {
@@ -77,17 +77,17 @@ public class AgentControleur {
                 newVersion.setSeance(details.getSeance());
             }
 
-            return modelRepository.save(newVersion);
+            return service.save(newVersion);
         }
         return details;
     }
 
     @DeleteMapping("/agent/{id}")
     public ResponseEntity<Agent> delete(@PathVariable(value = "id") Long id) {
-        Optional<Agent> item = modelRepository.findById(id);
+        Optional<Agent> item = service.findById(id);
         if (item.isPresent()) {
             Agent form = item.get();
-            modelRepository.delete(form);
+            service.delete(form);
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();

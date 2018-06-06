@@ -1,7 +1,8 @@
 package co.simplon.formation.controleur;
 
 import co.simplon.formation.modele.Seance;
-import co.simplon.formation.repository.SeanceRepository;
+import co.simplon.formation.service.LettreConvocation;
+import co.simplon.formation.service.SeanceService;
 import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,21 +20,35 @@ public class SeanceControleur {
 
     @Autowired
     private
-    SeanceRepository modelRepository;
+    SeanceService service;
+
+    @Autowired
+    private LettreConvocation serviceConvocations;
+
 
     @GetMapping("/sessions")
     public List<Seance> getAll() {
-        return modelRepository.findAll();
+        return service.findAll();
+    }
+
+    @GetMapping("/sessionsValides")
+    public List<Seance> getValide() {
+        return service.getValide();
     }
 
     @PostMapping("/session")
     public Seance create(@Valid @RequestBody Seance item) {
-        return modelRepository.save(item);
+        return service.save(item);
+    }
+
+    @PostMapping("/convocations")
+    public void convocation(@Valid @RequestBody Seance item) throws IOException, DocumentException {
+        serviceConvocations.lettreConvocation(item);
     }
 
     @GetMapping("/session/{id}")
     public ResponseEntity<Seance> getById(@PathVariable(value = "id") Long id) {
-        Optional<Seance> item = modelRepository.findById(id);
+        Optional<Seance> item = service.findById(id);
         if (item.isPresent()) {
             Seance form = item.get();
             return ResponseEntity.ok().body(form);
@@ -45,7 +60,7 @@ public class SeanceControleur {
     public Seance update(@PathVariable(value = "id") Long id,
                        @Valid @RequestBody Seance details) throws IOException, DocumentException {
 
-        Optional<Seance> oldVersion = modelRepository.findById(id);
+        Optional<Seance> oldVersion = service.findById(id);
         if (oldVersion.isPresent()) {
 
             Seance newVersion = oldVersion.get();
@@ -59,8 +74,14 @@ public class SeanceControleur {
             if (details.getSalle() != null) {
                 newVersion.setSalle(details.getSalle());
             }
-            if (details.getHabilitation() != null) {
-                newVersion.setHabilitation(details.getHabilitation());
+            if (details.getDateDebut() != null) {
+                newVersion.setDateDebut(details.getDateDebut());
+            }
+            if (details.getDateFin() != null) {
+                newVersion.setDateFin(details.getDateFin());
+            }
+            if (details.getValidation() != null) {
+                newVersion.setValidation(details.getValidation());
             }
             if (details.getFormation() != null) {
                 newVersion.setFormation(details.getFormation());
@@ -75,17 +96,17 @@ public class SeanceControleur {
                 newVersion.setNbrePersonne(details.getNbrePersonne());
             }
 
-            return modelRepository.save(newVersion);
+            return service.save(newVersion);
         }
         return details;
     }
 
     @DeleteMapping("/session/{id}")
     public ResponseEntity<Seance> delete(@PathVariable(value = "id") Long id) {
-        Optional<Seance> item = modelRepository.findById(id);
+        Optional<Seance> item = service.findById(id);
         if (item.isPresent()) {
             Seance form = item.get();
-            modelRepository.delete(form);
+            service.delete(form);
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();

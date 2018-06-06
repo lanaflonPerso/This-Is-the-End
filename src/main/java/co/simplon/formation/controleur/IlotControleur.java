@@ -2,7 +2,7 @@ package co.simplon.formation.controleur;
 
 
 import co.simplon.formation.modele.Ilot;
-import co.simplon.formation.repository.IlotRepository;
+import co.simplon.formation.service.IlotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,21 +18,21 @@ public class IlotControleur {
 
     @Autowired
     private
-    IlotRepository modelRepository;
+    IlotService service;
 
     @GetMapping("/ilots")
     public List<Ilot> getAll() {
-        return modelRepository.findAll();
+        return service.findAll();
     }
 
     @PostMapping("/ilot")
     public Ilot create(@Valid @RequestBody Ilot item) {
-        return modelRepository.save(item);
+        return service.save(item);
     }
 
     @GetMapping("/ilot/{id}")
     public ResponseEntity<Ilot> getById(@PathVariable(value = "id") Long id) {
-        Optional<Ilot> item = modelRepository.findById(id);
+        Optional<Ilot> item = service.findById(id);
         if (item.isPresent()) {
             Ilot form = item.get();
             return ResponseEntity.ok().body(form);
@@ -44,23 +44,23 @@ public class IlotControleur {
     public Ilot update(@PathVariable(value = "id") Long id,
                        @Valid @RequestBody Ilot details) {
 
-        Optional<Ilot> oldVersion = modelRepository.findById(id);
+        Optional<Ilot> oldVersion = service.findById(id);
         if (oldVersion.isPresent()) {
             Ilot newVersion = oldVersion.get();
             if (details.getNom() != null) {
                 newVersion.setNom(details.getNom());
             }
-            return modelRepository.save(newVersion);
+            return service.save(newVersion);
         }
         return details;
     }
 
     @DeleteMapping("/ilot/{id}")
     public ResponseEntity<Ilot> delete(@PathVariable(value = "id") Long id) {
-        Optional<Ilot> item = modelRepository.findById(id);
+        Optional<Ilot> item = service.findById(id);
         if (item.isPresent()) {
             Ilot form = item.get();
-            modelRepository.delete(form);
+            service.delete(form);
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();

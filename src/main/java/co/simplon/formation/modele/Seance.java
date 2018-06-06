@@ -1,6 +1,6 @@
 package co.simplon.formation.modele;
 
-import co.simplon.formation.outils.LettreConvocation;
+import co.simplon.formation.service.LettreConvocation;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.itextpdf.text.DocumentException;
 import lombok.*;
@@ -36,17 +36,27 @@ public class Seance implements Serializable {
     @Column
     private Integer nbrePersonne;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateDebut;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateFin;
+
+    @Column(columnDefinition="BOOLEAN DEFAULT true")
+    private Boolean validation;
+
     @Column(nullable = true, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date createdAt;
+
 
     @Column(nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date updatedAt;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "seance_id", referencedColumnName = "id", nullable = true)
     @JsonIgnoreProperties("seance")
     private Set<Agent> agent = new HashSet<>();
@@ -62,18 +72,8 @@ public class Seance implements Serializable {
     private Formateur formateur;
 
     @ManyToOne
-    @JoinColumn(name = "habilitation_id")
-    @JsonIgnoreProperties(value = {"seance", "formation", "formateur", "salle"})
-    private Habilitation habilitation;
-
-    @ManyToOne
     @JoinColumn(name = "salle_id")
     @JsonIgnoreProperties(value = {"seance", "formation", "formateur", "habilitation"})
     private Salle salle;
-
-    public void getlettreConvocation() throws IOException, DocumentException {
-        LettreConvocation.lettreConvocation(this.nom, "machin");
-
-    }
 
 }
