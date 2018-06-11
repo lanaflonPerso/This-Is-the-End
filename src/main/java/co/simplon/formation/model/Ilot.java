@@ -1,11 +1,12 @@
-package co.simplon.formation.modele;
+package co.simplon.formation.model;
 
-import com.fasterxml.jackson.annotation.*;
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -15,11 +16,11 @@ import java.util.List;
 @NoArgsConstructor
 @ToString(exclude="id")
 @Entity
-@Table(name = "flux")
+@Table(name = "ilot")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
         allowGetters = true)
-public class Flux implements Serializable{
+public class Ilot implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,8 +40,8 @@ public class Flux implements Serializable{
     private Date updatedAt;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="flux_id", referencedColumnName="id", nullable = true)
-    @JsonIgnoreProperties( value = {"flux"})
+    @JoinColumn(name="ilot_id", referencedColumnName="id", nullable = true)
+    @JsonIgnoreProperties( value = {"ilot"})
     private List<Agent> agent;
 
 }

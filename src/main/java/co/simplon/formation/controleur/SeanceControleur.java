@@ -1,8 +1,8 @@
 package co.simplon.formation.controleur;
 
-import co.simplon.formation.modele.Seance;
+import co.simplon.formation.model.Seance;
+import co.simplon.formation.repository.SeanceRepository;
 import co.simplon.formation.service.LettreConvocation;
-import co.simplon.formation.service.SeanceService;
 import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ public class SeanceControleur {
 
     @Autowired
     private
-    SeanceService service;
+    SeanceRepository service;
 
     @Autowired
     private LettreConvocation serviceConvocations;
@@ -44,6 +44,11 @@ public class SeanceControleur {
     @PostMapping("/convocations")
     public void convocation(@Valid @RequestBody Seance item) throws IOException, DocumentException {
         serviceConvocations.lettreConvocation(item);
+    }
+
+    @PostMapping("/emargement")
+    public void emargement(@Valid @RequestBody Seance item) throws IOException, DocumentException {
+        serviceConvocations.feuilleEmargement(item);
     }
 
     @GetMapping("/session/{id}")
@@ -106,7 +111,7 @@ public class SeanceControleur {
         Optional<Seance> item = service.findById(id);
         if (item.isPresent()) {
             Seance form = item.get();
-            service.delete(form);
+            service.deleteById(form.getId());
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();

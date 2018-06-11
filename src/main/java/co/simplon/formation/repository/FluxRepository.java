@@ -1,6 +1,6 @@
 package co.simplon.formation.repository;
 
-import co.simplon.formation.modele.Flux;
+import co.simplon.formation.model.Flux;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

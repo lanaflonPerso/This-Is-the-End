@@ -1,7 +1,7 @@
 package co.simplon.formation.controleur;
 
 
-import co.simplon.formation.modele.Ilot;
+import co.simplon.formation.model.Ilot;
 import co.simplon.formation.service.IlotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

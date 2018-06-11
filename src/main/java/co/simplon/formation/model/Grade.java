@@ -1,34 +1,37 @@
-package co.simplon.formation.modele;
+package co.simplon.formation.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-@Getter
-@Setter
-@Builder
+@Data
 @NoArgsConstructor
-@AllArgsConstructor
+@ToString(exclude="id")
 @Entity
-@Table(name = "salle")
+@Table(name = "grade")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
         allowGetters = true)
-public class Salle implements Serializable {
+public class Grade implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nom;
+    @Column
+    private String classe;
 
-    private Integer etage;
+    @Column
+    private String grade;
 
     @Column(nullable = true, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -41,10 +44,8 @@ public class Salle implements Serializable {
     private Date updatedAt;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="salle_id", referencedColumnName="id", nullable = true)
-    @JsonIgnoreProperties(value = {"formation", "formateur", "habilitation", "salle"})
-    private List<Seance> seance;
-
-
+    @JoinColumn(name="grade_id", referencedColumnName="id", nullable = true)
+    @JsonIgnoreProperties( value = {"grade"})
+    private List<Agent> agent;
 
 }

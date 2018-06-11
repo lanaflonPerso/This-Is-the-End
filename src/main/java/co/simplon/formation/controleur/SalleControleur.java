@@ -1,7 +1,7 @@
 package co.simplon.formation.controleur;
 
 
-import co.simplon.formation.modele.Salle;
+import co.simplon.formation.model.Salle;
 import co.simplon.formation.service.SalleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
 package co.simplon.formation;
 
-import co.simplon.formation.modele.Seance;
+import co.simplon.formation.model.Seance;
 import co.simplon.formation.repository.SeanceRepository;
 import co.simplon.formation.service.SeanceService;
 import org.junit.Test;
@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -60,7 +61,6 @@ public class SeanceCrudTest {
         assertSeanceFields(result.orElseGet(null));
         verify(repo, times(1)).findById(1L);
     }
-
 
     @Test
     public void testInsert() throws Exception {

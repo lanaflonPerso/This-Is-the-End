@@ -1,8 +1,8 @@
 package co.simplon.formation.controleur;
 
 
-import co.simplon.formation.modele.Agent;
-import co.simplon.formation.service.AgentService;
+import co.simplon.formation.model.Agent;
+import co.simplon.formation.repository.AgentRepository;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ public class AgentControleur {
 
     @Autowired
     private
-    AgentService service;
+    AgentRepository service;
 
     @GetMapping("/agents")
     public List<Agent> getAll() {
@@ -87,7 +87,7 @@ public class AgentControleur {
         Optional<Agent> item = service.findById(id);
         if (item.isPresent()) {
             Agent form = item.get();
-            service.delete(form);
+            service.deleteById(form.getId());
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();

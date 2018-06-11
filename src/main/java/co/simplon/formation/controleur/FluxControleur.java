@@ -1,6 +1,6 @@
 package co.simplon.formation.controleur;
 
-import co.simplon.formation.modele.Flux;
+import co.simplon.formation.model.Flux;
 import co.simplon.formation.service.FluxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

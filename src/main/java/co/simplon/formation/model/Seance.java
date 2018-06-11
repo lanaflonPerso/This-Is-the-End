@@ -1,14 +1,11 @@
-package co.simplon.formation.modele;
+package co.simplon.formation.model;
 
-import co.simplon.formation.service.LettreConvocation;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.itextpdf.text.DocumentException;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;

@@ -1,4 +1,4 @@
-package co.simplon.formation.modele;
+package co.simplon.formation.model;
 
 import com.fasterxml.jackson.annotation.*;
 import lombok.Data;

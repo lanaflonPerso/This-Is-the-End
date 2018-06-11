@@ -1,7 +1,7 @@
 package co.simplon.formation.controleur;
 
 
-import co.simplon.formation.modele.Grade;
+import co.simplon.formation.model.Grade;
 import co.simplon.formation.service.GradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
